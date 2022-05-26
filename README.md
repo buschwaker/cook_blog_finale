@@ -32,9 +32,9 @@
 5. Создать суперюзера для доступа в админку `python manage.py createsuperuser`
 
 ## Доступ к проекту по удаленному серверу:
-Просмотреть рабочий проект можно [здесь](http://buschwacker.pythonanywhere.com/)
+Просмотреть рабочий проект можно [здесь](http://akroshko.pythonanywhere.com/)
 
 ## Доступ к админке:
-Зайти в админку можно по [ссылке](http://buschwacker.pythonanywhere.com/admin).<br>
+Зайти в админку можно по [ссылке](http://akroshko.pythonanywhere.com/admin).<br>
 Логин: `admin`.<br>
 Пароль: `admin`.
