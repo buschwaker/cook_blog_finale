@@ -1,0 +1,19 @@
+{% load menu_tags %}
+{% with request.resolver_match.view_name as view_name %}
+
+<nav class="header__menu">
+    <ul>
+        <li class="{% if view_name  == 'home' %}active{% endif %}"><a href="/">Главная</a></li>
+
+        {% get_last_post %}
+
+        <li class="{% if view_name  == 'about' %}active{% endif %}"><a href="{% url 'about' %}">О нас</a></li>
+        <li class="{% if view_name  == 'contact' %}active{% endif %}"><a href="{% url 'contact' %}">Контакты</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'signin:logout' %}">Выйти</a></li>
+        {% else %}
+        <li><a href="{% url 'signin:signup' %}">Войти</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endwith %}

@@ -1,0 +1,80 @@
+{% load static %}
+{% with request.resolver_match.view_name as view_name %}
+<div class="signin">
+        <div class="signin__warp">
+            <div class="signin__content">
+                <div class="signin__logo">
+                    <a href="/"><img src="{% static 'img/siign-in-logo.png' %}" alt=""></a>
+                </div>
+                <p>Авторизованному пользователю доступно комментирование постов.</p>
+                <div class="signin__form">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name  != 'signin:signup' %}active{% endif %}" href="{% url 'signin:signup' %}" aria-selected="false">
+                                Регистрация
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name  != 'signin:login' %}active{% endif %}" href="{% url 'signin:login' %}" aria-selected="false">
+                                Авторизация
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                    </ul>
+                    <div class="tab-content">
+                        {% if register_context %}
+                        <div class="tab-pane active">
+                            <div class="signin__form__text">
+                                <p>Зарегистрируйтесь:</p>
+                                <form action="{% url 'signin:signup' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form.username }}
+                                    {{ form.email }}
+                                    {{ form.password1 }}
+                                    {{ form.password2 }}
+                                    {{ form.avatar }}
+
+
+<!--                                    <input type="text" placeholder="User Name*">-->
+<!--                                    <input type="text" placeholder="Password">-->
+<!--                                    <input type="text" placeholder="Confirm Password">-->
+<!--                                    <input type="text" placeholder="Email Address">-->
+<!--                                    <input type="text" placeholder="Full Name">-->
+<!--                                    <label for="sign-agree-check">-->
+<!--                                        I agree to the terms & conditions-->
+<!--                                        <input type="checkbox" id="sign-agree-check">-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+                                    <button type="submit" class="site-btn">Зарегистрироваться сейчас</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="tab-pane active">
+                            <div class="signin__form__text">
+                                <form action="{% url 'signin:login' %}" method="post">
+                                    {% csrf_token %}
+                                    {{ form.username }}
+                                    {{ form.password }}
+
+<!--                                    <input type="text" placeholder="User Name*">-->
+<!--                                    <input type="text" placeholder="Password">-->
+<!--                                    <input type="text" placeholder="Confirm Password">-->
+<!--                                    <input type="text" placeholder="Email Address">-->
+<!--                                    <input type="text" placeholder="Full Name">-->
+<!--                                    <label for="sign-agree-check">-->
+<!--                                        I agree to the terms & conditions-->
+<!--                                        <input type="checkbox" id="sign-agree-check">-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+                                    <button type="submit" class="site-btn">Авторизоваться сейчас</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endwith %}

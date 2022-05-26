@@ -1,0 +1,41 @@
+{% load menu_tags social_tags static cache %}
+
+
+
+{% cache 5000 lev_nav %}
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a href="./index.html"><img src="{% static 'img/humberger/humberger-logo.png' %}" alt=""></a>
+    </div>
+    <nav class="humberger__menu__nav mobile-menu">
+        <ul>
+            <li><a href="/">Главная</a></li>
+            {% get_categories %}
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'contact' %}">Контакты</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'signin:logout' %}">Выйти</a></li>
+            {% else %}
+            <li><a href="{% url 'signin:signup' %}">Войти</a></li>
+            {% endif %}
+            </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="humberger__menu__about">
+        <div class="humberger__menu__title sidebar__item__title">
+            <h6>Обо мне</h6>
+        </div>
+        {% get_about as about %}
+        <img src="{{ about.about_images.image.url }}" alt="">
+        <p>{{ about.mini_text|safe }}</p>
+        <div class="humberger__menu__about__social sidebar__item__follow__links">
+            {% get_social_links as social_links %}
+              {% for item in social_links %}
+                  <a href="{{ item.link }}"><img style="max-width: 5%;" src="{{ item.icon.url }}"></a>
+              {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endcache %}

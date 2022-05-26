@@ -1,0 +1,13 @@
+{% load menu_tags mptt_tags %}
+
+
+{% get_list_category as list_category %}
+{% recursetree list_category %}
+
+  <li style="margin-left: calc(20px * {{ node.level }});"><a href="{% url 'post_list' node.slug %}">{{ node.name }} <span>{{ node.post.count }}</span></a></li>
+  {% if not node.is_leaf_node %}
+  <li>{{ children }}</li>
+
+  {% endif %}
+{% endrecursetree %}
+

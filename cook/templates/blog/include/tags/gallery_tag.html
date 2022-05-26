@@ -1,0 +1,33 @@
+{% load static %}
+
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <div class="hero__item">
+            <div class="container-fluid">
+                <div class="row">
+                    {% for photo in photos %}
+                    {% if forloop.counter|add:"-1"|divisibleby:4 %}
+                    <div class="col-lg-6 p-0">
+                        <div class="hero__inside__item hero__inside__item--wide set-bg"
+                            data-setbg="{{ photo.image.url }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6  p-0">
+                    {% elif forloop.counter|divisibleby:4 %}
+                     </div>
+                    <div class="col-lg-3 col-md-6  p-0">
+                        <div class="hero__inside__item set-bg" data-setbg="{{ photo.image.url }}">
+                        </div>
+                    </div>
+                    {% else %}
+                        <div class="hero__inside__item hero__inside__item--small set-bg"
+                            data-setbg="{{ photo.image.url }}">
+                        </div>
+
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

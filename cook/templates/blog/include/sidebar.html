@@ -1,0 +1,50 @@
+{% load social_tags menu_tags %}
+{% load static cache %}
+
+{% cache 5000 sidebar %}
+<div class="col-lg-4 col-md-4">
+<div class="sidebar__item">
+    <div class="sidebar__about__item">
+        <div class="sidebar__item__title">
+            <h6>Обо мне</h6>
+        </div>
+        {% get_about as about %}
+        <img src="{{ about.about_images.first.image.url }}" alt="about.about_images.first.alt">
+        <h6>Всем привет! Меня зовут <span>{{ about.name }}</span></h6>
+        <p>{{ about.mini_text|safe }}</p>
+        <a href="{% url 'about' %}" class="primary-btn">Читать</a>
+    </div>
+    <div class="sidebar__follow__item">
+        <div class="sidebar__item__title">
+            <h6>Подпишитесь</h6>
+        </div>
+        <div class="sidebar__item__follow__links">
+            {% get_social_links as social_links %}
+            {% for item in social_links %}
+                <a href="{{ item.link }}"><img src="{{ item.icon.url }}"></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="sidebar__item__banner">
+        <img src="{% static 'img/sidebar/banner.jpg' %}" alt="">
+    </div>
+    <div class="sidebar__item__categories">
+        <div class="sidebar__item__title">
+            <h6>Категории</h6>
+        </div>
+        <ul>
+            {% include 'blog/include/tags/sidebar_category.html' %}
+<!--            <li><a href="#">Recipes <span>128</span></a></li>-->
+<!--            <li><a href="#">Dinner <span>32</span></a></li>-->
+<!--            <li><a href="#">Dessert <span>86</span></a></li>-->
+<!--            <li class="p-left"><a href="#">Smothie <span>25</span></a></li>-->
+<!--            <li class="p-left"><a href="#">Drinks <span>36</span></a></li>-->
+<!--            <li class="p-left"><a href="#">Cakes <span>15</span></a></li>-->
+<!--            <li><a href="#">Vegan <span>63</span></a></li>-->
+<!--            <li><a href="#">Weightloss <span>27</span></a></li>-->
+        </ul>
+    </div>
+
+</div>
+</div>
+{% endcache %}
